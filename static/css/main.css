@@ -1,0 +1,30 @@
+nav,
+section{
+    margin: 25px;
+}
+
+input[readOnly]{
+    border: none;
+}
+
+ul{
+    padding-left: 0px;
+}
+
+li{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+table{
+    margin-top:20px;
+    border-collapse: collapse;
+    border: 1px solid grey;
+}
+
+td,
+th{
+    border: 1px solid grey;
+    padding: 5px 20px;
+}
