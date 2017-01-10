@@ -8,7 +8,7 @@ import time
 app = Flask(__name__)
 app.secret_key = 'secret key'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data2.db'
 
 db = SQLAlchemy(app)
 
@@ -44,13 +44,21 @@ class Todo(db.Model, ModelHelper):
     id = db.Column(db.Integer, primary_key=True)
     task = db.Column(db.String())
     created_time = db.Column(db.Integer, default=0)
+    complete = db.Column(db.Boolean)
+
 
     def __init__(self, form):
         self.task = form.get('task', '')
         self.created_time = int(time.time())
+        self.complete = False
 
     def update(self, task):
         self.task = task
+        self.save()
+        return True
+
+    def change_status(self):
+        self.complete = not self.complete
         self.save()
         return True
 
@@ -69,7 +77,8 @@ class Todo(db.Model, ModelHelper):
         d = dict(
             id=self.id,
             task=self.task,
-            created_time=self.created_time
+            created_time=self.created_time,
+            complete=self.complete
         )
         return d
 

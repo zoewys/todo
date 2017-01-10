@@ -56,6 +56,17 @@ def update(todo_id):
     return json.dumps(r, ensure_ascii=False)
 
 
+@main.route('/todo/status/<int:todo_id>', methods=['PUT'])
+def complete(todo_id):
+    t = Todo.query.get(todo_id)
+    t.change_status()
+    r = response_data(None, t.json())
+
+    return json.dumps(r, ensure_ascii=False)
+
+
+
+
 @main.route('/todo/remove/<int:todo_id>')
 def remove(todo_id):
     t = Todo.query.get(todo_id)

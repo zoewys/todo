@@ -5,7 +5,7 @@
         var tpl = `
             <li>
                 <input type="hidden" name="id" value="${t.id}" readonly>
-                <input type="text" name="task" value="${t.task}" readonly>
+                <input class="${t.complete?'del':''}" type="text" name="task" value="${t.task}" readonly>
                 <button name="update" hidden>确认</button>
                 <button name="edit">修改</button>
                 <button name="remove">删除</button>
